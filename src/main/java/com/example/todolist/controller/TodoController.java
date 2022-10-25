@@ -3,10 +3,9 @@ package com.example.todolist.controller;
 import com.example.todolist.Domain.Todo;
 import com.example.todolist.Service.TodoService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -16,6 +15,11 @@ public class TodoController {
 
     TodoController(TodoService todoService){
         this.todoService = todoService;
+    }
+    @GetMapping("/todos")
+    @ResponseBody
+    public List<Todo> getTodos(){
+        return todoService.getTodos();
     }
 
     @PostMapping("/todos")

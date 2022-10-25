@@ -3,6 +3,9 @@ package com.example.todolist.Service;
 import com.example.todolist.Domain.Todo;
 import com.example.todolist.dao.TodoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 @Service
 public class TodoService {
@@ -19,5 +22,9 @@ public class TodoService {
         newtodo.setChecked(false);
         todoRepository.save(newtodo);
         return newtodo;
+    }
+
+    public List<Todo> getTodos() {
+        return todoRepository.findAll();
     }
 }
