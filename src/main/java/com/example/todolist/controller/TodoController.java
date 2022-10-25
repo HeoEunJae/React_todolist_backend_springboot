@@ -24,8 +24,8 @@ public class TodoController {
 
     @PostMapping("/todos")
     @ResponseBody
-    public Todo createTodos(@RequestBody Todo todo){
-
-        return todoService.createTodo(todo);
+    public List<Todo> createTodos(@RequestBody Todo todo){
+        todoService.createTodo(todo);
+        return todoService.getTodos();
     }
 }
