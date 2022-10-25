@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-@RestController("/todos")
+@RestController
 public class TodoController {
 
     private final TodoService todoService;
@@ -17,12 +16,12 @@ public class TodoController {
     TodoController(TodoService todoService){
         this.todoService = todoService;
     }
-    @GetMapping("")
+    @GetMapping("/todos")
     public List<Todo> getTodos(){
         return todoService.getTodos();
     }
 
-    @PostMapping("")
+    @PostMapping("/todos")
     public List<Todo> createTodos(@RequestBody Todo todo){
         todoService.createTodo(todo);
         return todoService.getTodos();
