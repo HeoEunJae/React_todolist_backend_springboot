@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/todos")
@@ -37,6 +38,12 @@ public class TodoController {
     @PatchMapping("{id}")
     public List<Todo> checkedTodos(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
         todoService.checkedTodo(id, response);
+        return todoService.getTodos();
+    }
+
+    @PatchMapping("/edit/{id}")
+    public List<Todo> editTodoById(@PathVariable("id") Integer id, @RequestBody Map<String, Object> params, HttpServletResponse response) throws IOException {
+        todoService.editTodoById(id, params.get("content"), response);
         return todoService.getTodos();
     }
 }
