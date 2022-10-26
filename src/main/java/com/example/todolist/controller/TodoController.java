@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/todos")
 public class TodoController {
 
     private final TodoService todoService;
@@ -16,18 +17,18 @@ public class TodoController {
     TodoController(TodoService todoService){
         this.todoService = todoService;
     }
-    @GetMapping("/todos")
+    @GetMapping("")
     public List<Todo> getTodos(){
         return todoService.getTodos();
     }
 
-    @PostMapping("/todos")
+    @PostMapping("")
     public List<Todo> createTodos(@RequestBody Todo todo){
         todoService.createTodo(todo);
         return todoService.getTodos();
     }
 
-    @DeleteMapping("/todos/{id}")
+    @DeleteMapping("{id}")
     public List<Todo> deleteTodos(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
         todoService.deleteTodo(id, response);
         return todoService.getTodos();
