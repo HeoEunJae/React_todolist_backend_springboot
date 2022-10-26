@@ -47,4 +47,21 @@ public class TodoService {
 
         }
     }
+
+    public void checkedTodo(Integer id, HttpServletResponse response) throws IOException {
+        Optional<Todo> todo = todoRepository.findById(id);
+        if(todo.isPresent()){
+            Todo targettodo = todo.get();
+            targettodo.setChecked(!targettodo.isChecked());
+            todoRepository.save(targettodo);
+        } else {
+            ResponseDTO responseDTO = new ResponseDTO();
+            responseDTO.setCode("f-2");
+            responseDTO.setMessage("없는 할 일입니다.");
+            response.setStatus(404);
+            response.setHeader("content-type", "application/json;charset-uft-8");
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(response.getOutputStream(), responseDTO);
+        }
+    }
 }

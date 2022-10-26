@@ -33,4 +33,10 @@ public class TodoController {
         todoService.deleteTodo(id, response);
         return todoService.getTodos();
     }
+
+    @PatchMapping("{id}")
+    public List<Todo> checkedTodos(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
+        todoService.checkedTodo(id, response);
+        return todoService.getTodos();
+    }
 }
